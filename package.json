@@ -9,8 +9,8 @@
 	"start": "node dist/server.mjs"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "André Dias (https-dre)",
+  "license": "MIT",
   "packageManager": "pnpm@10.11.0",
   "devDependencies": {
     "@types/node": "^22.15.18",
