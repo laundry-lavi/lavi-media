@@ -8,7 +8,7 @@ import {
 import fastifyMultipart from "@fastify/multipart";
 import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUi from "@fastify/swagger-ui";
-import EnvConfig from './config';
+import { router } from "./router";
 
 const app = fastify({
 	ignoreTrailingSlash: true,
@@ -37,8 +37,12 @@ const run = async () => {
 	app.setValidatorCompiler(validatorCompiler);
 	app.setSerializerCompiler(serializerCompiler);
 
-	app.listen({ port: 7700 }).then(() => {
-		console.log("Server Running => PORT: 7700");
+	await router(app);
+
+	const port = process.env.PORT || 7700;
+
+	app.listen({ port: Number(port) }).then(() => {
+		console.log(`Server Running => PORT: ${port}`);
 	});
 };
 
