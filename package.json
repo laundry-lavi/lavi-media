@@ -4,27 +4,31 @@
   "description": "",
   "main": "src/server.ts",
   "scripts": {
-	"dev": "tsx --env-file .env.local --watch src/server.ts",
-	"build": "tsup src --format esm",
-	"start": "node dist/server.mjs"
+    "dev": "tsx --env-file .env.local --watch src/server.ts",
+    "build": "tsup src --format esm",
+    "start": "node dist/server.mjs"
   },
   "keywords": [],
   "author": "André Dias (https-dre)",
   "license": "MIT",
   "packageManager": "pnpm@10.11.0",
   "devDependencies": {
+    "@types/cryptojs": "^3.1.33",
     "@types/node": "^22.15.18",
+    "client-s3": "link:@types/@aws-sdk/client-s3",
     "tsup": "^8.5.0",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.824.0",
     "@fastify/cors": "^11.0.1",
     "@fastify/formbody": "^8.0.2",
     "@fastify/multipart": "^9.0.3",
     "@fastify/swagger": "^9.5.1",
     "@fastify/swagger-ui": "^5.2.2",
     "bcryptjs": "^3.0.2",
+    "cryptojs": "^2.5.3",
     "fastify": "^5.3.3",
     "fastify-type-provider-zod": "^4.0.2",
     "postgres": "^3.4.5",
