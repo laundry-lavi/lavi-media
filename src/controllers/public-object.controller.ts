@@ -1,14 +1,9 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { z } from "zod";
-import { addPublicObject } from "../schemas/public-objects";
 import { IPublicObjectRepository } from "../irespository";
+import { uploadFile } from "../services/upload-file";
 
 export class PublicObjectController {
 	private readonly publicObjectRepo: IPublicObjectRepository;
-
-	constructor(publicObjectRepo: IPublicObjectRepository) {
-		this.publicObjectRepo = publicObjectRepo;
-	}
 
 	public async addObject(request: FastifyRequest, reply: FastifyReply) {
 		const contentType = request.headers["content-type"];
@@ -20,8 +15,8 @@ export class PublicObjectController {
 
 		if (!file) return reply.code(400).send({ message: "File not found" });
 
-		const { objectName } = request.body as z.infer<typeof addPublicObject.body>;
+		const s3Object = await uploadFile(file);
 
-		return reply.status(201).send({ message: `Objeto ${objectName} recebido com sucesso` });
+		return reply.status(201).send({ message: `Objeto recebido com sucesso`, details: s3Object });
 	}
 }
