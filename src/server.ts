@@ -9,6 +9,7 @@ import fastifyMultipart from "@fastify/multipart";
 import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUi from "@fastify/swagger-ui";
 import { router } from "./router";
+import { ServerErrorHandler } from "./error-handler";
 
 const app = fastify({
 	ignoreTrailingSlash: true,
@@ -36,6 +37,8 @@ const run = async () => {
 
 	app.setValidatorCompiler(validatorCompiler);
 	app.setSerializerCompiler(serializerCompiler);
+
+	app.setErrorHandler(ServerErrorHandler)
 
 	await router(app);
 
