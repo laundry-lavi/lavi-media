@@ -16,3 +16,25 @@ export const addPublicObject = {
 		}),
 	},
 };
+
+export const getPublicObjects = {
+	params: z.object({
+		object_id: z.string(),
+	}),
+	response: {
+		201: z.object({
+			data: z.object({
+				objects: z.array(
+					z.object({
+						key: z.string(),
+						url: z.string(),
+						size: z.number(),
+						lastModified: z.date(),
+					})
+				),
+			}),
+		}),
+	},
+	tags: ["public"],
+	summary: "Get an objects list by your key prefix or your complete key",
+};
