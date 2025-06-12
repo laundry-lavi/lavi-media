@@ -7,5 +7,5 @@ export const router = async (server: FastifyInstance) => {
 	const app = server.withTypeProvider<ZodTypeProvider>();
 	const publicObjectController = new PublicObjectController();
 
-	app.post("/objects/public", { schema: addPublicObject }, publicObjectController.addObject);
+	app.put("/objects/public", { schema: addPublicObject }, publicObjectController.addObject);
 };
