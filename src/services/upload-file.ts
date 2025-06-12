@@ -2,7 +2,7 @@ import { MultipartFile } from "@fastify/multipart";
 import { Readable } from "stream";
 import { randomUUID } from "crypto";
 import { S3Object } from "../entities";
-import { runPutCommand } from "../objects_db/save";
+import { runPutCommand } from "../objects_db/s3client";
 
 const streamToBuffer = async (stream: Readable): Promise<Buffer> => {
 	const chunks: Buffer[] = [];
