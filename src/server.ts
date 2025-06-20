@@ -1,8 +1,8 @@
 import fastify from "fastify";
 import {
-	validatorCompiler,
-	serializerCompiler,
-	jsonSchemaTransform,
+  validatorCompiler,
+  serializerCompiler,
+  jsonSchemaTransform,
 } from "fastify-type-provider-zod";
 
 import fastifyMultipart from "@fastify/multipart";
@@ -12,41 +12,41 @@ import { router } from "./router";
 import { ServerErrorHandler } from "./error-handler";
 
 const app = fastify({
-	ignoreTrailingSlash: true,
+  ignoreTrailingSlash: true,
 });
 
 const run = async () => {
-	await app.register(fastifyMultipart);
+  await app.register(fastifyMultipart);
 
-	await app.register(fastifySwagger, {
-		swagger: {
-			consumes: ["application/json", "multipart/form-data"],
-			produces: ["application/json"],
-			info: {
-				title: "Laundry Media API",
-				description: "...",
-				version: "1.0.0",
-			},
-		},
-		transform: jsonSchemaTransform,
-	});
+  await app.register(fastifySwagger, {
+    swagger: {
+      consumes: ["application/json", "multipart/form-data"],
+      produces: ["application/json"],
+      info: {
+        title: "Laundry Media API",
+        description: "...",
+        version: "1.0.0",
+      },
+    },
+    transform: jsonSchemaTransform,
+  });
 
-	await app.register(fastifySwaggerUi, {
-		routePrefix: "/docs",
-	});
+  await app.register(fastifySwaggerUi, {
+    routePrefix: "/docs",
+  });
 
-	app.setValidatorCompiler(validatorCompiler);
-	app.setSerializerCompiler(serializerCompiler);
+  app.setValidatorCompiler(validatorCompiler);
+  app.setSerializerCompiler(serializerCompiler);
 
-	app.setErrorHandler(ServerErrorHandler)
+  app.setErrorHandler(ServerErrorHandler)
 
-	await router(app);
+  await router(app);
 
-	const port = process.env.PORT || 7700;
+  const port = process.env.PORT || 7700;
 
-	app.listen({ port: Number(port) }).then(() => {
-		console.log(`Server Running => PORT: ${port}`);
-	});
+  app.listen({ port: Number(port), host: "0.0.0.0" }).then(() => {
+    console.log(`Server Running => PORT: ${port}`);
+  });
 };
 
 run();
