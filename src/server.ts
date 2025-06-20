@@ -44,9 +44,13 @@ const run = async () => {
 
   const port = process.env.PORT || 7700;
 
-  app.listen({ port: Number(port), host: "0.0.0.0" }).then(() => {
-    console.log(`Server Running => PORT: ${port}`);
-  });
+  try {
+    const address = await app.listen({ port: Number(port), host: "0.0.0.0" });
+    console.log('Server running: ', address);
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  }
 };
 
 run();
