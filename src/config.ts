@@ -13,6 +13,7 @@ const vars = [
   "AWS_ACCESS_KEY_ID",
   "AWS_SECRET_ACCESS_KEY",
   "AWS_REGION",
+  "BUCKET_NAME",
 ];
 
 const missingVars = vars.filter((v) => !EnvConfig.has(v));
