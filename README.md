@@ -8,7 +8,7 @@
 
 ![Maintainer](https://img.shields.io/badge/maintainer-https--dre-blue)
 
-Uma api criada para armazenar toda mídia (fotos, vídeos etc) do aplicativo "Colave".
+Uma API criada para armazenar toda mídia (fotos, vídeos etc) do aplicativo "Laví".
 
 ## Sobre o Projeto
 
