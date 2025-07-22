@@ -23,8 +23,8 @@ const run = async () => {
       consumes: ["application/json", "multipart/form-data"],
       produces: ["application/json"],
       info: {
-        title: "Laundry Media API",
-        description: "...",
+        title: "Lavi Media API",
+        description: "An API based on AWS S3 for storing files",
         version: "1.0.0",
       },
     },
@@ -38,7 +38,7 @@ const run = async () => {
   app.setValidatorCompiler(validatorCompiler);
   app.setSerializerCompiler(serializerCompiler);
 
-  app.setErrorHandler(ServerErrorHandler)
+  app.setErrorHandler(ServerErrorHandler);
 
   await router(app);
 
@@ -46,7 +46,7 @@ const run = async () => {
 
   try {
     const address = await app.listen({ port: Number(port), host: "0.0.0.0" });
-    console.log('Server running: ', address);
+    console.log("Server running: ", address);
   } catch (err) {
     console.error(err);
     process.exit(1);
