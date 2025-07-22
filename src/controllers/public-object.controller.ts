@@ -2,7 +2,11 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { uploadFile } from "../services/upload-file";
 import { getPublicObjects } from "../schemas/public-objects";
 import { z } from "zod";
-import { runListCommand } from "../objects_db/s3client";
+import {
+  runDeleteCommand,
+  runGetCommand,
+  runListCommand,
+} from "../objects_db/s3client";
 import EnvConfig from "../config";
 
 export class PublicObjectController {
@@ -42,5 +46,19 @@ export class PublicObjectController {
     }
 
     return reply.code(200).send({ data: { objects: result } });
+  }
+
+  public async deleteObject(request: FastifyRequest, reply: FastifyReply) {
+    const { object_id } = request.params as any;
+
+    const obj = await runGetCommand(EnvConfig.get("BUCKET_NAME")!, object_id);
+
+    if (!obj) {
+      return reply.code(404).send({ details: "Object not found!" });
+    }
+
+    await runDeleteCommand(EnvConfig.get("BUCKET_NAME")!, object_id);
+
+    return reply.code(204).send();
   }
 }
