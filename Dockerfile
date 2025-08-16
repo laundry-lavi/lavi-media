@@ -15,9 +15,9 @@ FROM node:22-alpine
 
 WORKDIR /app
 
-COPY --from=builer /app/dist ./dist
+COPY --from=builder /app/dist ./dist
 COPY package.json .
 
-RUN npm install --production
+RUN npm install --omit=dev
 
 CMD ["npm", "start"]
